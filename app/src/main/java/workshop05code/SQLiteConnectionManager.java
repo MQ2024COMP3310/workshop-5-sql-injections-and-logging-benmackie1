@@ -149,9 +149,9 @@ public class SQLiteConnectionManager {
         String sql = "SELECT count(id) as total FROM validWords WHERE word like'" + guess + "';";
 
         try (Connection conn = DriverManager.getConnection(databaseURL);
+             stmt.setString(1, sql)
                 PreparedStatement stmt = conn.prepareStatement(sql)){
-
-            stmt.setString(1, sql)
+            
             ResultSet resultRows = stmt.executeQuery();
             if (resultRows.next()) {
                 int result = resultRows.getInt("total");
